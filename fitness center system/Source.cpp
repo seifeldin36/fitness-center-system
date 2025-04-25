@@ -35,11 +35,14 @@ struct workouts
 {
 	int workout_id;
 	string workout_name;
+    int number_of_exercises;
 	string exercises[100];
 	int duration;
 
 };
-
+workouts w[100];
+int counter = 0;
+int wn;
 
 
 
@@ -128,10 +131,43 @@ int main()
 					cin >> choice;
 					switch (choice)
 					{
-					case 1:
+					case 1: cout << "---------------- List of Clients ------------------------" << endl;
+                        for(int i=0;i<Client_index;i++)
+                        {    
+                        cout <<"Client #"<<i+1 << " : "<< client[i].username<<'\t'<<"ID : "<< client[i].client_id <<endl;
+                        }
 
 						break;
-					case 2:
+					case 2: cout << "How Many Workout plans you want to create ? : ";
+                    cin >> wn;
+                    cin.ignore();
+                    
+                        int i = wn;
+                        if(w[i].workout_name.size()!= 0)
+                        {
+                            i++;
+                        }
+                        while(w[i].workout_name.size()== 0)
+                        {
+                        cout << "Workout #" << i << endl;
+                        cout << "Enter The Workout name : ";
+                        getline(cin, w[i].workout_name);
+                        cout << "Enter The Workout ID : ";
+                        cin >> w[i].workout_id;
+                        cout << "how many exrcises in this work out? : ";
+                        cin >> w[i].number_of_exercises;
+                        cin.ignore();
+                        cout << "Enter The Excersis : ";
+                        for (int j = 0;j < w[i].number_of_exercises;j++)
+                        {
+                            getline(cin, w[i].exercises[j]);
+                        }
+                        cout << "how much time do the workout take? (in minutes) : ";
+                        cin >> w[i].duration;
+                        cin.ignore();
+                        cout << "--------------------------------------------------------------------"<<endl;
+                        counter++;
+                        }
 
 						break;
 					case 3:
@@ -278,7 +314,7 @@ void register_trainer( int&Trainer_index)
 	cin >> trainer[Trainer_index].username;
 	cout << "Enter your Password : ";
 	cin >> trainer[Trainer_index].password;
-	
+	trainer[Trainer_index].trainer_id = Trainer_index+1;
 
 
 	
@@ -321,7 +357,7 @@ void register_client(int& Client_index)
 	cin >> client[Client_index].username;
 	cout << "Enter your Password : ";
 	cin >> client[Client_index].password;
-
+    client[Client_index].client_id = Client_index+1 ;
 }
 
 
